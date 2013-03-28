@@ -1,0 +1,14 @@
+
+
+  select sa.sa_id, spp.effective_start_date AS "START_DATE", spp.effective_end_date AS "STOP_DATE", p.program
+  from spp_sdp_program   spp,
+       spp_sdp            sdp,
+       spp_program        p,
+       ci_sa              sa
+  where sdp.sa_id    = sa.sa_id
+    and sa.sa_status_flg not in ('20','10')
+    and sdp.sdp_id   = spp.sdp_id
+    and spp.SDP_PRO_STATUS_ID = 1600
+    and spp.effective_end_date is null
+    and p.program_id = spp.program_id
+    order by 1;
